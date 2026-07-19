@@ -4,10 +4,8 @@ import pandas as pd
 from transformers import pipeline
 from datetime import datetime
 import feedparser
-RSS_URLS = [
-   "https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen"
-]
 
+RSS_URLS = ["https://news.google.com/rss/search?q=site%3Areuters.com&hl=en-US&gl=US&ceid=US%3Aen"]
 tickers = input("Enter tickers separated by spaces(e.g. TLX.AX BHP.AX): ").split()
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
@@ -64,7 +62,6 @@ for rss in RSS_URLS:
         for ticker in tickers:
             if ticker.split(".")[0] in (title + content):
                 data.append((date, ticker, title, content))
-
 
 df = pd.DataFrame(data, columns=["Date (YYYY-MM)", "Ticker", "Title", "Content"])
 
